@@ -1,0 +1,14 @@
+a {
+    /* 取消下划线 */
+    text-decoration: none;
+}
+/* 设置段落首行缩进 */
+p {
+    text-indent: 2em; /* 首行缩进2em */
+    line-height: 2; /* 行高2倍 */
+}
+
+.news-content {
+    width: 70%; /* 宽度占70% */
+    margin: 0 auto; /* 横向居中 */
+}
