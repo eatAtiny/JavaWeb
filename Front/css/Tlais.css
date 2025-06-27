@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+}
+
+#container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 顶栏样式 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 加大加粗标题 */
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 文本链接样式 */
+.header a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+/* 退出登录按钮样式 */
+.header a:hover {
+    color: #ff0000;
+}
+
+/* 搜索表单区域 */
+.search-form {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* 表单控件样式 */
+.search-form input[type="text"],
+.search-form select {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+}
+
+/* 按钮样式 */
+.search-form button {
+    padding: 5px 15px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 清空按钮样式 */
+.search-form button.clear {
+    background-color: #6c757d;
+}
+
+.table {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+/* 设置表格单元格边框 */
+.table td,
+.table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10%;
+}
+
+/* 页脚版权区域 */
+.footer {
+    background-color: #8f8c8c;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.footer .company-name {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.footer .copyright {
+    font-size: 0.9em;
+}
