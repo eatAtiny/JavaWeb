@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
             String name = parts[3];
             Integer age = Integer.parseInt(parts[4]);
             LocalDateTime updateTime = LocalDateTime.parse(parts[5], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            return new User(id, username, password, name, age, updateTime);
+            return new User(id, username, password, name, age);
         }).collect(Collectors.toList());
         return userList;
     }
