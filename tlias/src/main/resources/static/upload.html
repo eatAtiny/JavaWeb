@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+    <h1>Upload</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        姓名：<input type="text" name="username"><br>
+        年龄：<input type="number" name="age"><br>
+        头像：<input type="file" name="avatar" required><br>
+        <input type="submit" value="上传">
+    </form>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package org.example.tlias.service;
 
+import org.example.tlias.pojo.Emp;
 import org.example.tlias.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -12,4 +13,11 @@ public interface EmpService {
      * @return PageResult 分页查询结果
      */
     PageResult page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end);
+
+    /**
+     * 新增员工
+     * @param emp 员工对象
+     */
+    void save(Emp emp);
+
 }

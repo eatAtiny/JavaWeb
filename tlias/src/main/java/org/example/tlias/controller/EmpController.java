@@ -1,15 +1,13 @@
 package org.example.tlias.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.tlias.pojo.Emp;
 import org.example.tlias.pojo.PageResult;
 import org.example.tlias.pojo.Result;
 import org.example.tlias.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -29,5 +27,12 @@ public class EmpController {
         log.info("查询请求参数：{},{},{},{},{},{}", page, pageSize, name, gender, begin, end);
         PageResult pageResult = empService.page(page,pageSize,name,gender,begin,end);
         return Result.success(pageResult);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("新增员工：{}", emp);
+        empService.save(emp);
+        return Result.success();
     }
 }
