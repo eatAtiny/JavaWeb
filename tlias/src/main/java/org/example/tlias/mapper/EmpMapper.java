@@ -1,13 +1,11 @@
 package org.example.tlias.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.example.tlias.pojo.Emp;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -44,4 +42,38 @@ public interface EmpMapper {
     @Insert("insert into emp(username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) " +
             "values (#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
     void insert(Emp emp);
+
+    /**
+     * 批量删除员工信息
+     * @param ids 员工id
+     */
+    void deleteByIds(List<Integer> ids);
+
+    /**
+     *根据Id查询员工信息
+     * @param id 员工id
+     */
+    Emp findById(Integer id);
+
+    /**
+     * 更新员工信息
+     * @param emp 员工对象
+     */
+    void updateById(Emp emp);
+
+    /**
+     * 统计各个职位的员工人数
+     */
+    /*
+    @MapKey("pos")：这个注解用于指定Map的键名。
+    mybatis会将查询结果中的某一列作为Map的键名，其他列作为Map的值。
+     */
+    @MapKey("pos")
+    List<Map<String,Object>> countEmpJobData();
+
+    /**
+     * 统计员工性别信息
+     */
+    @MapKey("name")
+    List<Map> countEmpGenderData();
 }
