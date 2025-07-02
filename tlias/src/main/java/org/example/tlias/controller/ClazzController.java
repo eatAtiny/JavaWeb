@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clazzs")
-public class ClazzsController {
+public class ClazzController {
 
     @Autowired
     private ClazzService clazzService;
