@@ -15,6 +15,12 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @GetMapping("/{id}")
+    public Result getStudentById(@PathVariable String id) {
+        Student student = studentService.getStudentById(id);
+        return Result.success(student);
+    }
+
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1", required = true) Integer page,
                        @RequestParam(defaultValue = "10", required = true) Integer pageSize,
@@ -34,6 +40,18 @@ public class StudentController {
     @PostMapping
     public Result add(@RequestBody Student student) {
         studentService.add(student);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Student student) {
+        studentService.update(student);
+        return Result.success();
+    }
+
+    @PutMapping("/violation/{id}/{score}")
+    public Result violation(@PathVariable Integer id, @PathVariable Integer score) {
+        studentService.violation(id,score);
         return Result.success();
     }
 }

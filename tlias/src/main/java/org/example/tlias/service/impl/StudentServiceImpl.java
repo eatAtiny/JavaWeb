@@ -11,12 +11,18 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentMapper studentMapper;
+
+    @Override
+    public Student getStudentById(String id) {
+        return studentMapper.getStudentById(id);
+    }
 
     @Override
     public PageResult page(Integer page, Integer pageSize, String name, Integer degree, Integer classId) {
@@ -39,4 +45,16 @@ public class StudentServiceImpl implements StudentService {
         student.setUpdateTime(LocalDateTime.now());
         studentMapper.insert(student);
     }
+
+    @Override
+    public void update(Student student) {
+        student.setUpdateTime(LocalDateTime.now());
+        studentMapper.update(student);
+    }
+
+    @Override
+    public void violation(Integer id, Integer score) {
+        studentMapper.violation(id,score);
+    }
+
 }

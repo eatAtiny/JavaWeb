@@ -4,8 +4,16 @@ import org.example.tlias.pojo.PageResult;
 import org.example.tlias.pojo.Student;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudentService {
+
+    /**
+     * 根据id查询学生信息
+     * @param id 学生id
+     * @return 学生对象
+     */
+    Student getStudentById(String id);
 
     /**
      * 分页查询
@@ -29,5 +37,19 @@ public interface StudentService {
      * @param student 要新增的学生对象
      */
     void add(Student student);
+
+    /**
+     * 修改
+     * @param student 要修改的学生对象
+     */
+    void update(Student student);
+
+    /**
+     * 违纪处理
+     * @param id 学生id
+     * @param score 违纪分数
+     */
+    void violation(Integer id,Integer score);
+
 
 }

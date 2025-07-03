@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.tlias.mapper.StudentMapper">
+    <select id="getStudentById" resultType="org.example.tlias.pojo.Student">
+        select s.*, c.name className from student s left join clazz c on s.clazz_id = c.id where s.id = #{id}
+    </select>
     <select id="findAll" resultType="org.example.tlias.pojo.Student">
         select s.*, c.name className from student s left join clazz c on s.clazz_id = c.id
         <where>
@@ -31,6 +34,48 @@
     </insert>
 
     <update id="update">
-        update student set name = #{name}, gender = #{gender}, clazz_id = #{clazzId}, degree = #{degree} where id = #{id}
+        update student set
+            name = #{name},
+            no = #{no},
+            gender = #{gender},
+            phone = #{phone},
+            id_card = #{idCard},
+            is_college = #{isCollege},
+            address = #{address},
+            degree = #{degree},
+            graduation_date = #{graduationDate},
+            clazz_id = #{clazzId},
+            violation_count = #{violationCount},
+            violation_score = #{violationScore},
+            update_time = #{updateTime}
+        where id = #{id}
     </update>
+    <update id="violation">
+        update student set
+            violation_count = violation_count + 1,
+            violation_score = violation_score + #{score},
+            update_time = NOW()
+        where id = #{id}
+    </update>
+
+    <select id="studentDegreeData" resultType="java.util.Map">
+        select (case degree
+                    when 1 then '初中'
+                    when 2 then '高中'
+                    when 3 then '大专'
+                    when 4 then '本科'
+                    when 5 then '硕士'
+                    when 6 then '博士'
+                    else '其他'
+                end) name, count(*) value
+        from student
+        group by degree
+        order by count(*) desc
+    </select>
+    <select id="studentClazzData" resultType="java.util.Map">
+        select c.name name, count(*) value
+        from student s left join clazz c on s.clazz_id = c.id
+        group by c.id
+        order by count(*) desc
+    </select>
 </mapper>

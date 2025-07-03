@@ -1,5 +1,6 @@
 package org.example.tlias.pojo;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,11 +15,19 @@ public class GlobalExceptionHandler {
     
     //处理异常
     @ExceptionHandler
-    public ResponseEntity<Result> ex(Exception e){//方法形参中指定能够处理的异常类型
+    public Result ex(Exception e){//方法形参中指定能够处理的异常类型
         e.printStackTrace();//打印堆栈中的异常信息
         //捕获到异常之后，响应一个标准的Result
         Result result = Result.error("对不起,操作失败,请联系管理员");
-        return ResponseEntity.status(500).body(result);
+        result.setCode(500);
+        return result;
+    }
+
+    @ExceptionHandler
+    public Result ex(DataIntegrityViolationException e){
+        e.printStackTrace();
+        Result result = Result.error("对不起，当前部门下有员工，不能直接删除！");
+        return result;
     }
     
 }

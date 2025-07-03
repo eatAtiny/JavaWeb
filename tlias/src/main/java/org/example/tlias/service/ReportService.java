@@ -1,5 +1,6 @@
 package org.example.tlias.service;
 
+import org.example.tlias.pojo.ClazzOption;
 import org.example.tlias.pojo.JobOption;
 
 import java.util.List;
@@ -16,4 +17,17 @@ public interface ReportService {
      * @return 性别信息列表，每个元素是一个Map，包含性别和对应的员工数量
      */
     List<Map> getEmpGenderData();
+
+    /**
+     * 学历统计
+     * @return 学历统计结果
+     */
+    List<Map> studentDegreeData();
+
+    /**
+     * 班级人数统计
+     * @return 班级人数统计结果
+     */
+    ClazzOption studentClazzData();
+
 }
