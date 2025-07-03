@@ -2,6 +2,7 @@ package org.example.tlias.service;
 
 import org.apache.ibatis.annotations.MapKey;
 import org.example.tlias.pojo.Emp;
+import org.example.tlias.pojo.LoginInfo;
 import org.example.tlias.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -41,5 +42,10 @@ public interface EmpService {
      * @param emp 员工对象
      */
     void update(Emp emp);
+    /**
+     * 登录
+     * @return LoginInfo 登录信息
+     */
+    LoginInfo login(Emp emp);
 
 }
