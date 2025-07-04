@@ -1,6 +1,7 @@
 package org.example.tlias.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.example.tlias.anno.LogOperation;
 import org.example.tlias.pojo.Dept;
 
 import java.util.List;
@@ -23,12 +24,15 @@ public interface DeptMapper {
     @Select("select * from dept where id = #{id}")
     public Dept findById(int id);
 
+    @LogOperation
     @Delete("delete from dept where id = #{id}")
     public int deleteById(int id);
 
+    @LogOperation
     @Insert("INSERT INTO dept (name, create_time, update_time) VALUES (#{name}, #{createTime}, #{updateTime})")
     public int insert(Dept dept);
 
+    @LogOperation
     @Update("update dept set name=#{name},update_time=#{updateTime} where id=#{id};")
     public int update(Dept dept);
 

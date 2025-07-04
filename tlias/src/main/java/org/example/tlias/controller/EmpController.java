@@ -1,6 +1,7 @@
 package org.example.tlias.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.tlias.anno.LogOperation;
 import org.example.tlias.pojo.Emp;
 import org.example.tlias.pojo.PageResult;
 import org.example.tlias.pojo.Result;
@@ -30,6 +31,7 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
+    @LogOperation
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工：{}", emp);
@@ -37,6 +39,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @LogOperation
     @DeleteMapping
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("批量删除员工：{}", ids);
@@ -51,6 +54,7 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    @LogOperation
     @PutMapping
     public Result update(@RequestBody Emp emp) {
         log.info("更新员工：{}", emp);
