@@ -1,0 +1,12 @@
+demo/*
+!./demo/src/*
+!./demo/pom.xml
+
+tlias/*
+!tlias/src/
+!tlias/pom.xml
+
+vue_demo/
+
+vue-tlias/*
+# !vue-tlias/src/
