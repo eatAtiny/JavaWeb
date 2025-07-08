@@ -1,9 +1,9 @@
 <script setup>
-  import UserList from './views/UserList.vue'
+  import Element from './views/Element.vue'
 </script>
 
 <template>
-  <UserList />
+  <Element />
 </template>
 
 <style scoped>
