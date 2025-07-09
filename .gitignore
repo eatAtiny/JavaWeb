@@ -9,4 +9,4 @@ tlias/*
 vue_demo/
 
 vue-tlias/*
-# !vue-tlias/src/
+!vue-tlias/src/
