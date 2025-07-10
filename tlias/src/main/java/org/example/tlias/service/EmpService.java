@@ -48,4 +48,9 @@ public interface EmpService {
      */
     LoginInfo login(Emp emp);
 
+    /**
+     * 获取班主任列表
+     */
+    List<Map> getMasterList();
+
 }

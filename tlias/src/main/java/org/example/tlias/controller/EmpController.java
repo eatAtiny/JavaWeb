@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequestMapping("/emps")
@@ -60,5 +61,11 @@ public class EmpController {
         log.info("更新员工：{}", emp);
         empService.update(emp);
         return Result.success();
+    }
+
+    @GetMapping("/master")
+    public Result getMasterList() {
+        List<Map>  masterList = empService.getMasterList();
+        return Result.success(masterList);
     }
 }

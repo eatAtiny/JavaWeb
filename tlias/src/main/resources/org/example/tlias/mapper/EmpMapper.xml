@@ -46,6 +46,9 @@
             </if>
         </where>
     </select>
+    <select id="masterList" resultType="java.util.Map">
+        select id, name from emp where job = 1;
+    </select>
     <select id="deleteByIds">
         delete from emp where id in
         <foreach collection="ids" item="id" open="(" separator="," close=")">

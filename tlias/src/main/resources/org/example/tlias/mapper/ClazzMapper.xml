@@ -4,6 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.tlias.mapper.ClazzMapper">
 
+    <!--根据id查询班级信息-->
+    <select id="findById" resultType="org.example.tlias.pojo.Clazz">
+        <![CDATA[
+            select c.*, e.name masterName,
+            (CASE
+                WHEN CURDATE() < c.begin_date THEN '未开班'
+                WHEN CURDATE() BETWEEN c.begin_date AND c.end_date THEN '在读'
+                ELSE '已结课'
+            END) status
+            from clazz c left join emp e on c.master_id = e.id
+            where c.id = #{id}
+        ]]>
+    </select>
+
+
     <!--分页查询所有的班级信息-->
     <select id="findAll" resultType="org.example.tlias.pojo.Clazz">
         <![CDATA[

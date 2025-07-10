@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper
 public interface ClazzMapper {
 
-    @Select("select * from clazz where id = #{id}")
     Clazz findById(Integer id);
 
     List<Clazz> findAll(String name, LocalDate begin, LocalDate end);

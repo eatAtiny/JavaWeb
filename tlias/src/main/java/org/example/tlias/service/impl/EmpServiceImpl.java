@@ -125,4 +125,9 @@ public class EmpServiceImpl implements EmpService {
         }
         return null;
     }
+
+    @Override
+    public List<Map> getMasterList() {
+        return empMapper.masterList();
+    }
 }

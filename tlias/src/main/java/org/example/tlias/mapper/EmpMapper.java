@@ -43,6 +43,9 @@ public interface EmpMapper {
             "values (#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
     void insert(Emp emp);
 
+    @MapKey("id")
+    List<Map> masterList();
+
     /**
      * 批量删除员工信息
      * @param ids 员工id
