@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import { queryPageApi, addApi, queryInfoApi, updateApi } from '@/api/emp'
+import { queryPageApi, addApi, queryInfoApi, updateApi, deleteApi } from '@/api/emp'
 import { queryAllApi as queryAllDeptApi } from '@/api/dept'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 // 查询条件数据
 const searchEmp = ref({
@@ -114,6 +114,14 @@ const addEmp = () => {
   if (employeeFormRef.value) {
     employeeFormRef.value.resetFields()
   }
+}
+
+//记录勾选的员工的id
+const selectedIds = ref([]);
+//复选框勾选发生变化时触发 - selection: 当前选中的记录 (数组)
+const handleSelectionChange = (selection) => {
+  selectedIds.value = selection.map( item => item.id);
+  console.log(selectedIds.value);
 }
 
 // 验证规则
@@ -237,6 +245,47 @@ const edit = async (id) => {
     }
   }
 }
+
+//删除员工
+const deleteById = (id) => {
+  //弹出确认框
+  ElMessageBox.confirm('您确认删除该员工吗?','提示',
+    { confirmButtonText: '确认',cancelButtonText: '取消',type: 'warning'}
+  ).then(async () => { //确认
+    const result = await deleteApi(id);
+    if(result.code){
+      ElMessage.success('删除成功');
+      search();
+    }else{
+      ElMessage.error(result.msg);
+    }
+  }).catch(() => { //取消
+    ElMessage.info('您已取消删除');
+  })
+}
+
+//批量删除
+const deleteByIds = () => {
+  //弹出确认框
+  ElMessageBox.confirm('您确认删除该员工吗?','提示',
+    { confirmButtonText: '确认',cancelButtonText: '取消',type: 'warning'}
+  ).then(async () => { //确认
+    if(selectedIds.value && selectedIds.value.length > 0){
+      const result = await deleteApi(selectedIds.value);
+      if(result.code){
+        ElMessage.success('删除成功');
+        search();
+      }else{
+        ElMessage.error(result.msg);
+      }
+    }else {
+      ElMessage.info('您没有选择任何要删除的数据');
+    }
+  }).catch(() => { //取消
+    ElMessage.info('您已取消删除');
+  })
+}
+
 </script>
 
 <template>
@@ -265,11 +314,11 @@ const edit = async (id) => {
   </el-form>
 
   <el-button type="primary" @click="addEmp"> + 新增员工</el-button>
-  <el-button type="danger" @click=""> - 批量删除</el-button>
+  <el-button type="danger" @click="deleteByIds"> - 批量删除</el-button>
   <br><br>
 
   <!-- 表格 -->
-  <el-table :data="empList" border style="width: 100%">
+  <el-table :data="empList" border style="width: 100%" @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="55" align="center"></el-table-column>
     <el-table-column prop="name" label="姓名" width="120" align="center"></el-table-column>
     <el-table-column label="性别" width="170" align="center">
@@ -298,7 +347,7 @@ const edit = async (id) => {
     <el-table-column label="操作" fixed="right" align="center">
       <template #default="scope">
         <el-button size="small" type="primary" @click="edit(scope.row.id)">编辑</el-button>
-        <el-button size="small" type="danger" @click="">删除</el-button>
+        <el-button size="small" type="danger" @click="deleteById(scope.row.id)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
