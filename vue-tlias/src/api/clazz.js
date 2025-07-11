@@ -4,6 +4,9 @@ import request from '@/utils/request'
 export const queryPageApi = (name, page, pageSize, begin, end) => 
   request.get(`/clazzs?name=${name}&page=${page}&pageSize=${pageSize}&begin=${begin}&end=${end}`)
 
+// 查询所有班级
+export const queryAllApi = () => request.get('/clazzs/list');
+
 // 新增班级
 export const addApi = (clazz) =>  request.post('/clazzs', clazz);
 
