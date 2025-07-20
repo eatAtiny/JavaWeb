@@ -23,10 +23,13 @@ public class OperationLogAspect {
     private OperateLogMapper operateLogMapper;
 
     // 环绕通知
-    @Around("@annotation(logOperation)")
+//    @Around("@annotation(logOperation)")
     public Object around(ProceedingJoinPoint joinPoint, LogOperation logOperation) throws Throwable {
         // 记录开始时间
         long startTime = System.currentTimeMillis();
+        String methodSignature = joinPoint.getSignature().getDeclaringTypeName() + "." +
+                joinPoint.getSignature().getName();
+        log.info("AOP拦截到方法: {}", methodSignature);
         // 执行方法
         Object result = joinPoint.proceed();
         // 当前时间
