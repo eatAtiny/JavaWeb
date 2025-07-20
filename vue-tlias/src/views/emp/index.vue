@@ -55,6 +55,9 @@ watch(
   }
 )
 
+//声明token
+const token = ref('')
+
 onMounted(async () => {
   search()
   //加载所有部门数据
@@ -62,7 +65,17 @@ onMounted(async () => {
   if (result.code) {
     deptList.value = result.data
   }
+  //获取token
+  getToken()
+  
 })
+//获取token
+const getToken = () => {
+  const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+  if(loginUser && loginUser.token){
+    token.value = loginUser.token;
+  }
+}
 
 const search = async () => {
   // 处理查询逻辑
@@ -441,7 +454,7 @@ const deleteByIds = () => {
       <el-row :gutter="20">
         <el-col :span="24">
           <el-form-item label="头像">
-            <el-upload class="avatar-uploader" action="/api/upload" :show-file-list="false"
+            <el-upload class="avatar-uploader" action="/api/upload" :headers="{'token': token}" :show-file-list="false"
               :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
               <img v-if="employee.image" :src="employee.image" class="avatar" />
               <el-icon v-else class="avatar-uploader-icon">
